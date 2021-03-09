@@ -26,7 +26,7 @@ export default class Dropdown extends React.Component {
         }
         
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form className={'miceForm'} onSubmit={this.handleSubmit}>
                 <select value={this.state.rows} onChange={(e) => this.handleChange(e, 'rows')}>
                 {options.map((num) => {
                     return <option value={num} key={num + 'row'}>{num}</option>
@@ -38,7 +38,7 @@ export default class Dropdown extends React.Component {
                     return <option value={num} key={num + 'column'}>{num}</option>
                 })}
                 </select>
-                <input type="submit" value="New game" />
+                <input className={"submitButton"} type="submit" value="New game" />
             </form>
         )    
     } 

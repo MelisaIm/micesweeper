@@ -1,5 +1,16 @@
+body, #root {
+  height: 100vh;
+}
+
+h1 {
+  margin-top: 0;
+  padding-top: 30px;
+}
+
 .App {
   text-align: center;
+  background-image: url('./assets/rug.jpg');
+  height: 100%;
 }
 
 .App-logo {
@@ -35,4 +46,17 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.submitButton {
+  margin-left: 10px;
+  border-radius: 30px;
+  height: 30px;
+  width: 150px;
+  font-weight: bold;
+}
+
+.miceForm select {
+  margin: 10px;
+  padding: 5px;
 }

@@ -7,8 +7,24 @@
 }
 
 .square {
-    background:gray;
-    height: 15px;
-    width: 15px;
+    background:lightgray;
+    height: 20px;
+    width: 20px;
     border: 1px solid black;
+    text-align: center;
+    font-size: 15px;
+}
+
+.bomb.showBombs {
+    background-image: url('../assets/rat.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.flag {
+    background: black;
+}
+
+.seen {
+    background: white;
 }
