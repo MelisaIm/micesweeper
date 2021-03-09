@@ -30,3 +30,22 @@
 .seen {
     background: white;
 }
+
+.message {
+    margin-top: 15px;
+    font-size: 20px;
+}
+
+.message span {
+    color: white;
+    background-color: rgba(0,0,0,0.5);
+    padding: 5px 15px;
+}
+
+.message button {
+    margin-left: 10px;
+    border-radius: 30px;
+    height: 32px;
+    width: 150px;
+    font-weight: bold;
+}

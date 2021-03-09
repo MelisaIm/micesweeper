@@ -15,9 +15,9 @@ export default class Board extends React.Component {
 
         this.state = {
             board: newBoard,
-            playing: true, // if false, show bombs or win msg
+            playing: this.props.playing, // if false, show bombs or win msg
             exploded: false, 
-            bombs: 0
+            showMessage: this.props.showMessage,
         }
         
     }
@@ -133,15 +133,14 @@ export default class Board extends React.Component {
             })
         });
         this.setState({board});
-
         this.checkBoard();
     }
 
     checkBoard() {
         // win condition, all squares except bombs are "seen"
         const board = this.state.board;
-        const bombs = this.state.bombs;
         const squares = this.props.size.rows * this.props.size.columns;
+        const bombs = Math.floor(squares/5);
         let seen = 0;
         board.forEach(row => {
             row.forEach(square => {
@@ -149,15 +148,38 @@ export default class Board extends React.Component {
                     seen++;
                 }
                 if (square.bomb && square.seen) {
-                    alert("SORRY, YOU LOST")
+                    this.setState({exploded: true, showMessage: true, playing: false});
                     return;
                 }
             });
         });
         if (squares > (seen + bombs)) { // game is not over
-            console.log("Keep going!")
+            console.log("Keep going!", squares, seen, bombs)
         } else if (squares === (seen + bombs)){ // all squares are accounted for
-            console.log("Good job, you won!")
+            this.setState({showMessage: true, playing: false});
+        }
+    }
+
+    get showMessage() {
+        if (this.state.showMessage && !this.state.playing) {
+            if (this.state.exploded) {
+                return (<>
+                <div className={"message"}><span>Sorry, you followed your natural instincts after all :(</span><button 
+                onClick={() => {
+                    this.setState({showMessage: false, exploded: false});
+                    this.props.restart();
+                }}>My bad. Try again</button></div>
+                </>)
+            } else {
+                return (<>
+                    <div className={"message"}><span>Hooray! You did it! You ignored the human's demands and didn't catch the mice :)</span>
+                <button onClick={() => {
+                    this.setState({showMessage: false, exploded: false})
+                this.props.restart()}}>Thank goodness!</button></div>
+                </>)
+            }
+        } else {
+            return null;
         }
     }
 
@@ -171,6 +193,7 @@ export default class Board extends React.Component {
                     </div>
                 })}
                 </div>
+                {this.showMessage}
             </>
         )
     }

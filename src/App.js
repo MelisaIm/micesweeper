@@ -16,6 +16,7 @@ class App extends React.Component {
     }
     this.submitHandlerSizes = this.submitHandlerSizes.bind(this);
     this.follow = this.follow.bind(this);
+    this.restart = this.restart.bind(this);
   }
   
   componentDidMount() {
@@ -32,6 +33,10 @@ class App extends React.Component {
     this.setState({rows: obj.rows, columns: obj.columns, playing: true});
   }
 
+  restart() {
+    this.setState({playing: true});
+  }
+
   componentWillUnmount() {
     document.removeEventListener("mousemove", this.follow);
   }
@@ -42,7 +47,7 @@ class App extends React.Component {
         <h1>Welcome to MiceSweeper</h1>
         <h4>You're a pacifist cat trying really hard to not catch the mice in the house</h4>
         <Dropdown submitHandler={this.submitHandlerSizes}/>
-        <Board id={'noContextMenu'} size={{rows: this.state.rows, columns: this.state.columns}}/>
+        <Board id={'noContextMenu'} playing={this.state.playing} size={{rows: this.state.rows, columns: this.state.columns}} restart={this.restart}/>
         <img src={paw} id={"paw"} style={{height: '40px', width: '40px', position: 'absolute'}}/>
     </div>
   );
